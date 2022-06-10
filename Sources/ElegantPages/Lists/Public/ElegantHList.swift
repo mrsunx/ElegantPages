@@ -24,25 +24,23 @@ public struct ElegantHList: View, ElegantListManagerDirectAccess {
     }
 
     public var body: some View {
-        GeometryReader { geometry in
-            ElegantListView(manager: self.manager,
-                            listView: self.listView(geometry: geometry),
-                            isHorizontal: true,
-                            pageTurnType: self.pageTurnType,
-                            bounces: self.bounces)
-        }
+        ElegantListView(manager: self.manager,
+                        listView: self.listView(),
+                        isHorizontal: true,
+                        pageTurnType: self.pageTurnType,
+                        bounces: self.bounces)
     }
 
-    private func listView(geometry: GeometryProxy) -> some View {
+    private func listView() -> some View {
         HStack(alignment: .center, spacing: 0) {
             ElegantListController(manager: manager,
                                   axis: .horizontal,
-                                  length: geometry.size.height,
+                                  length: 300,
                                   pageTurnType: pageTurnType,
                                   viewForPage: viewForPage)
                 .frame(width: pagerWidth)
         }
-        .frame(width: screen.width, height: geometry.size.height, alignment: .leading)
+        .frame(width: screen.width, height: 100, alignment: .leading)
     }
 
 }
